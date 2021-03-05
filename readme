@@ -1,0 +1,11 @@
+docker-compose up -d
+
+django server
+    docker build -t scrapping -f Dockerfile .
+    docker run -it -p 8888:8888 scrapping
+
+build docker
+    sudo docker build --rm -t cronjob .
+
+run docker
+    sudo docker run -t -i cronjob

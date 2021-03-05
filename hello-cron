@@ -1,0 +1,12 @@
+0 * * * * root /app/cron.sh
+5 * * * * root /app/cron.sh
+10 * * * * root /app/cron.sh
+15 * * * * root /app/cron.sh
+20 * * * * root /app/cron.sh
+25 * * * * root /app/cron.sh
+30 * * * * root /app/cron.sh
+35 * * * * root /app/cron.sh
+40 * * * * root /app/cron.sh
+45 * * * * root /app/cron.sh
+50 * * * * root /app/cron.sh
+55 * * * * root /app/cron.sh
