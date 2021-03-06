@@ -30,8 +30,6 @@ class SpeechesTestimonySpider(Spider):
             item['source_site'] = self.start_urls[0]
             item['created_at'] = datetime.today().strftime('%Y-%m-%d')
 
-            # yield item
-            # print(item)
             self.items.append(item)
             yield scrapy.Request(item['article_link'], callback = self.parse_dir_contents)
 

@@ -6,26 +6,26 @@ from datetime import datetime
 from cron.items import ScrapItem
 
 
-class PressRoomPressreleasesSpider(Spider):
-    name = "pressroom_pressreleases"
-    allowed_domains = ["www.cftc.gov"]
+class SecNewsSpeechesSpider(Spider):
+    name = "sec_news_speeches"
+    allowed_domains = ["www.sec.gov"]
     start_urls = [
-        'https://www.cftc.gov/PressRoom/PressReleases'
+        'https://www.sec.gov/news/speeches'
     ]
 
     items = []
 
     def parse(self, response):
-        scrapItems = response.xpath('//table/tbody/tr')
+        scrapItems = response.xpath('//table/tbody/tr[contains(@class, "speeches-list-row")]')
         
         for scrapItem in scrapItems:
             item = ScrapItem()
 
-            item['headline'] = scrapItem.xpath('td[@headers="view-field-pdf-link-table-column"]/a/text()').extract()[0]
-            item['article_link'] = 'https://www.cftc.gov' + scrapItem.xpath('td[@headers="view-field-pdf-link-table-column"]/a/@href').extract()[0]
+            item['headline'] = scrapItem.xpath('td[@headers="view-field-display-title-table-column"]/a/text()').extract()[0]
+            item['article_link'] = 'https://www.sec.gov' + scrapItem.xpath('td[@headers="view-field-display-title-table-column"]/a/@href').extract()[0]
             
-            datetime_str = scrapItem.xpath('td[@headers="view-field-date-table-column"]/time/text()').extract()[0]
-            item['date'] = datetime.strptime(datetime_str, '%m/%d/%Y').strftime('%Y-%m-%d')
+            datetime_str = scrapItem.xpath('td[@headers="view-field-publish-date-table-column"]/time/@datetime').extract()[0]
+            item['date'] = datetime_str
 
             item['source_site'] = self.start_urls[0]
             item['created_at'] = datetime.today().strftime('%Y-%m-%d')
